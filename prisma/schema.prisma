@@ -1,0 +1,280 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+
+enum AutomationMode { DRY_RUN REVIEW AUTO }
+enum ContactConfidence { VERIFIED PUBLIC_BUSINESS_CONTACT UNVERIFIED UNKNOWN }
+enum LeadStatus { DISCOVERED QUALIFIED OUTREACH_READY CONTACTED REPLIED INTERESTED PERMISSION_GRANTED ASSETS_RECEIVED GENERATING PREVIEW_READY OFFER_SENT WON LOST DO_NOT_CONTACT }
+enum PermissionStatus { NOT_REQUESTED REQUESTED GRANTED DENIED REVOKED }
+enum JobStatus { PENDING PREPROCESSING UPLOADING GENERATING QUALITY_CHECK READY FAILED HUMAN_REVIEW }
+enum ReplyClass { INTERESTED PERMISSION_GRANTED QUESTION NOT_INTERESTED UNSUBSCRIBE OUT_OF_OFFICE OTHER }
+enum EmailStatus { DRAFT QUEUED SENT DELIVERED BOUNCED FAILED SUPPRESSED }
+enum ListingStatus { ACTIVE PENDING SOLD WITHDRAWN EXPIRED UNKNOWN }
+enum PaymentStatus { NOT_STARTED PENDING PAID FAILED REFUNDED }
+
+model ListingSource {
+  id String @id @default(cuid())
+  name String @unique
+  type String
+  authorized Boolean @default(false)
+  config Json?
+  listings Listing[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Brokerage {
+  id String @id @default(cuid())
+  name String
+  website String?
+  agents Agent[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Agent {
+  id String @id @default(cuid())
+  name String
+  email String?
+  phone String?
+  website String?
+  source String?
+  contactConfidence ContactConfidence @default(UNKNOWN)
+  manualContactApproval Boolean @default(false)
+  brokerageId String?
+  brokerage Brokerage? @relation(fields: [brokerageId], references: [id])
+  listings Listing[]
+  leads Lead[]
+  permissions Permission[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([email])
+}
+model Listing {
+  id String @id @default(cuid())
+  externalId String
+  sourceId String
+  source ListingSource @relation(fields: [sourceId], references: [id])
+  url String?
+  address String
+  city String
+  state String
+  zip String
+  price Int
+  beds Float?
+  baths Float?
+  sqft Int?
+  daysOnMarket Int
+  listingDate DateTime?
+  priceReductionCount Int @default(0)
+  currentPrice Int
+  originalPrice Int
+  hasVirtualTour Boolean @default(false)
+  has3DTour Boolean @default(false)
+  photoCount Int @default(0)
+  description String?
+  status ListingStatus @default(ACTIVE)
+  agentId String?
+  agent Agent? @relation(fields: [agentId], references: [id])
+  leads Lead[]
+  images ListingImage[]
+  permissions Permission[]
+  tours VirtualTour[]
+  firstSeenAt DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([sourceId, externalId])
+  @@index([city, zip, status])
+}
+model Lead {
+  id String @id @default(cuid())
+  listingId String
+  listing Listing @relation(fields: [listingId], references: [id])
+  agentId String?
+  agent Agent? @relation(fields: [agentId], references: [id])
+  score Int @default(0)
+  scoreReason String
+  status LeadStatus @default(DISCOVERED)
+  priority Int @default(0)
+  lastContactedAt DateTime?
+  nextActionAt DateTime?
+  permissionStatus PermissionStatus @default(NOT_REQUESTED)
+  experimentVariant String?
+  paymentStatus PaymentStatus @default(NOT_STARTED)
+  paidAmount Int?
+  notes String?
+  emails EmailMessage[]
+  replies Reply[]
+  permissions Permission[]
+  generationJobs GenerationJob[]
+  followUps FollowUp[]
+  auditLogs AuditLog[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([listingId, agentId])
+  @@index([status, score])
+}
+model ListingImage {
+  id String @id @default(cuid())
+  listingId String
+  listing Listing @relation(fields: [listingId], references: [id])
+  url String?
+  storageKey String?
+  authorizedSource String
+  checksum String
+  perceptualHash String?
+  mimeType String
+  width Int?
+  height Int?
+  roomClass String?
+  validationStatus String @default("PENDING")
+  createdAt DateTime @default(now())
+  @@unique([listingId, checksum])
+}
+model Permission {
+  id String @id @default(cuid())
+  leadId String
+  lead Lead @relation(fields: [leadId], references: [id])
+  listingId String
+  listing Listing @relation(fields: [listingId], references: [id])
+  agentId String
+  agent Agent @relation(fields: [agentId], references: [id])
+  status PermissionStatus @default(REQUESTED)
+  tokenHash String @unique
+  version String
+  grantedAt DateTime?
+  revokedAt DateTime?
+  ipAddress String?
+  userAgent String?
+  evidence Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model OutreachCampaign {
+  id String @id @default(cuid())
+  name String
+  active Boolean @default(false)
+  cadenceDays Int[] @default([0,3,7,14])
+  variants Json
+  emails EmailMessage[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model EmailMessage {
+  id String @id @default(cuid())
+  leadId String
+  lead Lead @relation(fields: [leadId], references: [id])
+  campaignId String?
+  campaign OutreachCampaign? @relation(fields: [campaignId], references: [id])
+  providerMessageId String?
+  direction String
+  fromAddress String
+  toAddress String
+  subject String
+  bodyText String
+  templateKey String
+  variant String?
+  status EmailStatus @default(DRAFT)
+  scheduledAt DateTime?
+  sentAt DateTime?
+  events EmailEvent[]
+  createdAt DateTime @default(now())
+  @@index([toAddress, sentAt])
+}
+model EmailEvent {
+  id String @id @default(cuid())
+  emailId String
+  email EmailMessage @relation(fields: [emailId], references: [id])
+  type String
+  providerEventId String? @unique
+  payload Json?
+  occurredAt DateTime
+  createdAt DateTime @default(now())
+}
+model Reply {
+  id String @id @default(cuid())
+  leadId String
+  lead Lead @relation(fields: [leadId], references: [id])
+  rawText String
+  classification ReplyClass
+  confidence Float
+  reasoningSummary String
+  requiresHumanReview Boolean @default(false)
+  receivedAt DateTime
+  createdAt DateTime @default(now())
+}
+model VirtualTour {
+  id String @id @default(cuid())
+  listingId String
+  listing Listing @relation(fields: [listingId], references: [id])
+  provider String
+  providerProjectId String
+  slug String @unique
+  tourUrl String?
+  previewUrl String?
+  unbrandedUrl String?
+  embedCode String?
+  generationCost Int?
+  generationTimeSeconds Int?
+  qualityConfidence Float?
+  expiresAt DateTime?
+  jobs GenerationJob[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model GenerationJob {
+  id String @id @default(cuid())
+  leadId String
+  lead Lead @relation(fields: [leadId], references: [id])
+  tourId String?
+  tour VirtualTour? @relation(fields: [tourId], references: [id])
+  status JobStatus @default(PENDING)
+  providerJobId String?
+  attempts Int @default(0)
+  error String?
+  qcReport Json?
+  startedAt DateTime?
+  completedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model FollowUp {
+  id String @id @default(cuid())
+  leadId String
+  lead Lead @relation(fields: [leadId], references: [id])
+  sequenceNumber Int
+  dueAt DateTime
+  status String @default("SCHEDULED")
+  stopReason String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([leadId, sequenceNumber])
+}
+model SuppressionEntry {
+  id String @id @default(cuid())
+  email String @unique
+  reason String
+  permanent Boolean @default(true)
+  source String
+  createdAt DateTime @default(now())
+}
+model AuditLog {
+  id String @id @default(cuid())
+  leadId String?
+  lead Lead? @relation(fields: [leadId], references: [id])
+  actor String
+  action String
+  entityType String
+  entityId String?
+  before Json?
+  after Json?
+  metadata Json?
+  createdAt DateTime @default(now())
+  @@index([entityType, entityId])
+}
+model SystemSetting {
+  id String @id @default(cuid())
+  key String @unique
+  value Json
+  updatedBy String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
