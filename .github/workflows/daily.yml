@@ -1,0 +1,14 @@
+name: Daily pipeline
+on:
+  schedule:
+    - cron: "30 10 * * *" # 06:30 America/New_York during daylight time; adjust seasonally or use a TZ-aware scheduler
+  workflow_dispatch:
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Invoke scheduler-neutral daily endpoint
+        env:
+          APP_URL: ${{ secrets.APP_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: curl --fail --retry 2 -X POST -H "Authorization: Bearer $CRON_SECRET" "$APP_URL/api/cron/daily"
