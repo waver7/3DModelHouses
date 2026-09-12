@@ -186,24 +186,3 @@ Tests cover scoring, deduplication, suppression, reply stops, permission gating,
 6. **Scale/insight:** daily reports, cohort analytics, cost/margin dashboards, multi-region sources, brokerage relationships, subscriptions, white-label portals, predictive scoring with human oversight.
 
 See [`TODO.md`](TODO.md) for the deployment checklist and Phase 2 backlog.
-
-## Run the top-five workflow right now
-
-The repository now includes a dependency-free operational dry run, so it works even before Next.js packages, PostgreSQL, or Redis are available:
-
-```bash
-npm run test:zero-deps
-npm run demo:top5
-# Custom authorized export:
-node scripts/run-top5.mjs /secure/path/authorized-listings.json reports/top-5-dry-run.json
-```
-
-The input must match `data/authorized-listings.example.json`. Set `sourceAuthorized: true` only when the record came from your licensed feed, an authorized export, or manual data you are entitled to use. Agent emails must be verified or published business contacts; the workflow does not guess or harvest addresses. The command applies target/qualification filters, ranks candidates, selects one variant per lead, and writes five personalized **permission-request drafts**.
-
-It deliberately does **not** send mail or generate tours. The example contacts use `.invalid`, and the listing records are fictional. To operate on real leads, supply an authorized listing export containing verified/public-business listing-agent contacts plus your real `EMAIL_FROM_NAME`, `EMAIL_FROM_ADDRESS`, `BUSINESS_ADDRESS`, public `APP_URL`, and a tested email-provider adapter. Only after an agent grants the recorded image-use permission may the generation workflow process their media. This ordering is a legal and product safety requirement, not a missing automation step.
-
-## Generated example 3D model
-
-Run `npm run generate:example-model`, then open `/demo-model` in the app or import `public/models/example-house.obj` together with `public/models/example-house.mtl` into an OBJ-compatible 3D tool. This is a real, procedurally generated mesh with named house, roof, door, window, garage, foundation, and porch groups. It is intentionally synthetic and uses no listing photographs; its metadata and preview clearly state that it is not a real property or architecturally accurate.
-
-The production permission gate remains unchanged for real listing media. A public URL proves that a browser can retrieve a photograph; it does not encode the media license or establish who owns the commercial derivative rights. Authorized/licensed real listing photos can use the same provider pipeline after provenance and permission are recorded.

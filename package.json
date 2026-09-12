@@ -11,10 +11,7 @@
     "test:watch": "vitest",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
-    "db:seed": "tsx prisma/seed.ts",
-    "demo:top5": "node scripts/run-top5.mjs",
-    "test:zero-deps": "node --test tests/*.test.mjs",
-    "generate:example-model": "node scripts/generate-example-model.mjs"
+    "db:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.16.2",
@@ -37,7 +34,5 @@
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
-  }
+  "prisma": { "seed": "tsx prisma/seed.ts" }
 }
