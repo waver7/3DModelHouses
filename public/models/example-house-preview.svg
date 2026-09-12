@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#d9ece5"/><stop offset="1" stop-color="#f5f1df"/></linearGradient><linearGradient id="wall" x2="1" y2="1"><stop stop-color="#d9ccb1"/><stop offset="1" stop-color="#a99a7d"/></linearGradient></defs>
+<rect width="1200" height="720" fill="url(#sky)"/><ellipse cx="600" cy="620" rx="500" ry="70" fill="#b3c4a0"/>
+<path d="M260 330 590 150 950 330 620 510Z" fill="#243d34"/><path d="M260 330 620 510 620 640 260 465Z" fill="url(#wall)"/><path d="M620 510 950 330 950 480 620 640Z" fill="#aa9d82"/>
+<path d="M225 336 586 135 628 158 260 362Z" fill="#172a23"/><path d="M586 135 980 321 950 350 586 170Z" fill="#314d42"/>
+<path d="M488 447 574 490 574 618 488 576Z" fill="#315b49"/><path d="M306 390 407 440 407 510 306 460Z" fill="#477987"/><path d="M691 493 867 399 867 520 691 612Z" fill="#d4d0c1" stroke="#766f61" stroke-width="8"/>
+<path d="M200 577 492 622 620 684 357 650Z" fill="#9b7250"/><circle cx="532" cy="530" r="6" fill="#e4c25d"/>
+<text x="70" y="90" font-family="Georgia,serif" font-size="45" fill="#173d30">Synthetic Example House</text><text x="72" y="125" font-family="Arial" font-size="18" fill="#4e665d">Procedurally generated OBJ · no listing photographs used</text>
+</svg>
