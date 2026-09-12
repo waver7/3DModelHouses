@@ -1,0 +1,162 @@
+{
+  "generatedAt": "2026-09-12T23:29:23.466Z",
+  "automationMode": "DRY_RUN",
+  "safetyNotice": "No email sent and no tour generated. Explicit image-use permission is required before generation.",
+  "leads": [
+    {
+      "listing": {
+        "externalId": "DEMO-110",
+        "source": "authorized-demo-import",
+        "sourceAuthorized": true,
+        "address": "1842 Lantern Ridge Dr",
+        "city": "Centerville",
+        "state": "OH",
+        "zip": "45459",
+        "price": 625000,
+        "daysOnMarket": 110,
+        "photoCount": 36,
+        "priceReductionCount": 2,
+        "has3DTour": false,
+        "hasVirtualTour": false,
+        "status": "ACTIVE",
+        "agent": {
+          "name": "Jordan Lee",
+          "email": "jordan@example.invalid",
+          "brokerage": "Buckeye Demo Realty",
+          "contactConfidence": "PUBLIC_BUSINESS_CONTACT"
+        },
+        "score": 100
+      },
+      "email": {
+        "to": "jordan@example.invalid",
+        "subject": "Quick idea for 1842 Lantern Ridge Dr",
+        "text": "Hi Jordan,\n\nI came across your listing at 1842 Lantern Ridge Dr. I noticed the property has been on the market for a little while.\n\nI create AI-powered interactive property walkthroughs using listing photos you already have, so there is no need to schedule another photographer or regain access to the property. With 36 existing photos, 1842 Lantern Ridge Dr appears to be a strong candidate.\n\nIf you would like, I can create a complimentary preview. Just reply YES, and I will send a secure authorization link so you can confirm that you have authority to let us use the listing media for the preview. No images will be processed before that authorization is recorded.\n\nBest,\nListing Revival\n\nAI-generated previews are visualizations and are not intended for measurements or architectural accuracy.\nBusiness address: [CONFIGURE BUSINESS_ADDRESS BEFORE SENDING]\nUnsubscribe: http://localhost:3000/unsubscribe?email=jordan%40example.invalid"
+      },
+      "action": "DRAFT_ONLY_PERMISSION_REQUIRED"
+    },
+    {
+      "listing": {
+        "externalId": "DEMO-96",
+        "source": "authorized-demo-import",
+        "sourceAuthorized": true,
+        "address": "615 Sycamore Bluff Way",
+        "city": "Beavercreek",
+        "state": "OH",
+        "zip": "45431",
+        "price": 710000,
+        "daysOnMarket": 96,
+        "photoCount": 30,
+        "priceReductionCount": 1,
+        "has3DTour": false,
+        "hasVirtualTour": false,
+        "status": "ACTIVE",
+        "agent": {
+          "name": "Avery Parker",
+          "email": "avery@example.invalid",
+          "brokerage": "Ohio Sample Properties",
+          "contactConfidence": "VERIFIED"
+        },
+        "score": 100
+      },
+      "email": {
+        "to": "avery@example.invalid",
+        "subject": "Quick idea for 615 Sycamore Bluff Way",
+        "text": "Hi Avery,\n\nI came across your listing at 615 Sycamore Bluff Way. I noticed the property has been on the market for a little while.\n\nI create AI-powered interactive property walkthroughs using listing photos you already have, so there is no need to schedule another photographer or regain access to the property. With 30 existing photos, 615 Sycamore Bluff Way appears to be a strong candidate.\n\nIf you would like, I can create a complimentary preview. Just reply YES, and I will send a secure authorization link so you can confirm that you have authority to let us use the listing media for the preview. No images will be processed before that authorization is recorded.\n\nBest,\nListing Revival\n\nAI-generated previews are visualizations and are not intended for measurements or architectural accuracy.\nBusiness address: [CONFIGURE BUSINESS_ADDRESS BEFORE SENDING]\nUnsubscribe: http://localhost:3000/unsubscribe?email=avery%40example.invalid"
+      },
+      "action": "DRAFT_ONLY_PERMISSION_REQUIRED"
+    },
+    {
+      "listing": {
+        "externalId": "DEMO-75",
+        "source": "authorized-demo-import",
+        "sourceAuthorized": true,
+        "address": "907 Meadow Run",
+        "city": "Springboro",
+        "state": "OH",
+        "zip": "45066",
+        "price": 519000,
+        "daysOnMarket": 75,
+        "photoCount": 28,
+        "priceReductionCount": 1,
+        "has3DTour": false,
+        "hasVirtualTour": false,
+        "status": "ACTIVE",
+        "agent": {
+          "name": "Morgan Reed",
+          "email": "morgan@example.invalid",
+          "brokerage": "Gem City Sample Homes",
+          "contactConfidence": "PUBLIC_BUSINESS_CONTACT"
+        },
+        "score": 95
+      },
+      "email": {
+        "to": "morgan@example.invalid",
+        "subject": "Quick idea for 907 Meadow Run",
+        "text": "Hi Morgan,\n\nI came across your listing at 907 Meadow Run. I noticed the property has been on the market for a little while.\n\nI create AI-powered interactive property walkthroughs using listing photos you already have, so there is no need to schedule another photographer or regain access to the property. With 28 existing photos, 907 Meadow Run appears to be a strong candidate.\n\nIf you would like, I can create a complimentary preview. Just reply YES, and I will send a secure authorization link so you can confirm that you have authority to let us use the listing media for the preview. No images will be processed before that authorization is recorded.\n\nBest,\nListing Revival\n\nAI-generated previews are visualizations and are not intended for measurements or architectural accuracy.\nBusiness address: [CONFIGURE BUSINESS_ADDRESS BEFORE SENDING]\nUnsubscribe: http://localhost:3000/unsubscribe?email=morgan%40example.invalid"
+      },
+      "action": "DRAFT_ONLY_PERMISSION_REQUIRED"
+    },
+    {
+      "listing": {
+        "externalId": "DEMO-68",
+        "source": "authorized-demo-import",
+        "sourceAuthorized": true,
+        "address": "338 Copperleaf Bend",
+        "city": "Dayton",
+        "state": "OH",
+        "zip": "45458",
+        "price": 680000,
+        "daysOnMarket": 68,
+        "photoCount": 22,
+        "priceReductionCount": 0,
+        "has3DTour": false,
+        "hasVirtualTour": false,
+        "status": "ACTIVE",
+        "agent": {
+          "name": "Taylor Monroe",
+          "email": "taylor@example.invalid",
+          "brokerage": "Demo Key Realty",
+          "contactConfidence": "VERIFIED"
+        },
+        "score": 90
+      },
+      "email": {
+        "to": "taylor@example.invalid",
+        "subject": "Quick idea for 338 Copperleaf Bend",
+        "text": "Hi Taylor,\n\nI came across your listing at 338 Copperleaf Bend. I noticed the property has been on the market for a little while.\n\nI create AI-powered interactive property walkthroughs using listing photos you already have, so there is no need to schedule another photographer or regain access to the property. With 22 existing photos, 338 Copperleaf Bend appears to be a strong candidate.\n\nIf you would like, I can create a complimentary preview. Just reply YES, and I will send a secure authorization link so you can confirm that you have authority to let us use the listing media for the preview. No images will be processed before that authorization is recorded.\n\nBest,\nListing Revival\n\nAI-generated previews are visualizations and are not intended for measurements or architectural accuracy.\nBusiness address: [CONFIGURE BUSINESS_ADDRESS BEFORE SENDING]\nUnsubscribe: http://localhost:3000/unsubscribe?email=taylor%40example.invalid"
+      },
+      "action": "DRAFT_ONLY_PERMISSION_REQUIRED"
+    },
+    {
+      "listing": {
+        "externalId": "DEMO-52",
+        "source": "authorized-demo-import",
+        "sourceAuthorized": true,
+        "address": "29 Fairwood Ct",
+        "city": "Miamisburg",
+        "state": "OH",
+        "zip": "45342",
+        "price": 385000,
+        "daysOnMarket": 52,
+        "photoCount": 24,
+        "priceReductionCount": 1,
+        "has3DTour": false,
+        "hasVirtualTour": false,
+        "status": "ACTIVE",
+        "agent": {
+          "name": "Casey Taylor",
+          "email": "casey@example.invalid",
+          "brokerage": "Miami Valley Demo",
+          "contactConfidence": "PUBLIC_BUSINESS_CONTACT"
+        },
+        "score": 60
+      },
+      "email": {
+        "to": "casey@example.invalid",
+        "subject": "Quick idea for 29 Fairwood Ct",
+        "text": "Hi Casey,\n\nI came across your listing at 29 Fairwood Ct. I noticed the property has been on the market for a little while.\n\nI create AI-powered interactive property walkthroughs using listing photos you already have, so there is no need to schedule another photographer or regain access to the property. With 24 existing photos, 29 Fairwood Ct appears to be a strong candidate.\n\nIf you would like, I can create a complimentary preview. Just reply YES, and I will send a secure authorization link so you can confirm that you have authority to let us use the listing media for the preview. No images will be processed before that authorization is recorded.\n\nBest,\nListing Revival\n\nAI-generated previews are visualizations and are not intended for measurements or architectural accuracy.\nBusiness address: [CONFIGURE BUSINESS_ADDRESS BEFORE SENDING]\nUnsubscribe: http://localhost:3000/unsubscribe?email=casey%40example.invalid"
+      },
+      "action": "DRAFT_ONLY_PERMISSION_REQUIRED"
+    }
+  ]
+}
